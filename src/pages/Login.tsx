@@ -54,7 +54,7 @@ const Login: React.FC = () => {
                         </IonToolbar>
                     </IonHeader>
 
-                    <IonContent scrollY={false} color='dark' className='ion-padding'>
+                    <IonContent scrollY={false} className='ion-padding'>
                         <IonGrid fixed>
                             <IonRow class='ion-justify-content-center'>
                                 <IonCol size='12' sizeMd='8' sizeLg='6' sizeXl='4'>
@@ -66,7 +66,7 @@ const Login: React.FC = () => {
 
                             <IonRow class='ion-justify-content-center'>
                                 <IonCol size='12' sizeMd='8' sizeLg='6' sizeXl='4'>
-                                    <IonCard color={'dark'}>
+                                    <IonCard>
                                         <IonCardContent>
                                             <form onSubmit={doLogin}>
                                                 <IonInput
