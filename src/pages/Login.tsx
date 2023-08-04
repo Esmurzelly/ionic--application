@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { IonButton, IonCard, IonCardContent, IonContent, IonFooter, IonHeader, IonIcon, IonInput, IonPage, IonTitle, IonToolbar, useIonRouter } from '@ionic/react';
+import { IonButton, IonCard, IonCardContent, IonCol, IonContent, IonFooter, IonGrid, IonHeader, IonIcon, IonInput, IonPage, IonRow, IonTitle, IonToolbar, useIonLoading, useIonRouter } from '@ionic/react';
 import { logInOutline, personCircleOutline } from 'ionicons/icons';
 import { Preferences } from '@capacitor/preferences';
 
@@ -12,11 +12,16 @@ const INTRO_KEY = 'intro-seen';
 const Login: React.FC = () => {
     const router = useIonRouter();
     const [intoSeen, setIntroSeen] = useState(true);
+    const [present, dismiss] = useIonLoading()
 
-    const doLogin = (e: any) => {
+    const doLogin = async (e: any) => {
         e.preventDefault();
-        console.log("do login")
-        // router.push('/home', 'root');
+        await present('Logging in...');
+
+        setTimeout(async () => {
+            dismiss();
+            router.push('/app', 'root');
+        }, 2000);
     };
 
     const finishIntro = async () => {
@@ -34,7 +39,7 @@ const Login: React.FC = () => {
 
     const seeIntroAgain = () => {
         setIntroSeen(false);
-        Preferences.remove({key:INTRO_KEY});
+        Preferences.remove({ key: INTRO_KEY });
     }
 
     return (
@@ -49,65 +54,78 @@ const Login: React.FC = () => {
                         </IonToolbar>
                     </IonHeader>
 
-                    <IonContent scrollY={false} color='dark'>
-                        <div className='ion-text-center ion-padding'>
-                            <img src={logo} alt="logo" width={'20%'} />
-                        </div>
-                        <IonCard color={'dark'}>
-                            <IonCardContent>
-                                <form onSubmit={doLogin}>
-                                    <IonInput
-                                        label='email'
-                                        type='email'
-                                        placeholder='youremail@gmail.com'
-                                        labelPlacement='floating'
-                                        fill='outline'
-                                    />
+                    <IonContent scrollY={false} color='dark' className='ion-padding'>
+                        <IonGrid fixed>
+                            <IonRow class='ion-justify-content-center'>
+                                <IonCol size='12' sizeMd='8' sizeLg='6' sizeXl='4'>
+                                    <div className='ion-text-center ion-padding'>
+                                        <img src={logo} alt="logo" width={'20%'} />
+                                    </div>
+                                </IonCol>
+                            </IonRow>
 
-                                    <IonInput
-                                        label='password'
-                                        type='password'
-                                        placeholder='password'
-                                        labelPlacement='floating'
-                                        fill='outline'
-                                        className='ion-margin-top'
-                                    />
+                            <IonRow class='ion-justify-content-center'>
+                                <IonCol size='12' sizeMd='8' sizeLg='6' sizeXl='4'>
+                                    <IonCard color={'dark'}>
+                                        <IonCardContent>
+                                            <form onSubmit={doLogin}>
+                                                <IonInput
+                                                    label='email'
+                                                    type='email'
+                                                    placeholder='youremail@gmail.com'
+                                                    labelPlacement='floating'
+                                                    fill='outline'
+                                                />
 
-                                    <IonButton
-                                        type='submit'
-                                        expand='block'
-                                        className='ion-margin-top'
-                                    >
-                                        Login
-                                        <IonIcon icon={logInOutline} slot='end' />
-                                    </IonButton>
+                                                <IonInput
+                                                    label='password'
+                                                    type='password'
+                                                    placeholder='password'
+                                                    labelPlacement='floating'
+                                                    fill='outline'
+                                                    className='ion-margin-top'
+                                                />
 
-                                    <IonButton
-                                        type='button'
-                                        expand='block'
-                                        className='ion-margin-top'
-                                        color={'secondary'}
-                                        routerLink='/register'
-                                    >
-                                        Create account
-                                        <IonIcon icon={personCircleOutline} slot='end' />
-                                    </IonButton>
+                                                <IonButton
+                                                    type='submit'
+                                                    expand='block'
+                                                    className='ion-margin-top'
+                                                >
+                                                    Login
+                                                    <IonIcon icon={logInOutline} slot='end' />
+                                                </IonButton>
 
-                                    <IonButton
-                                        type='button'
-                                        expand='block'
-                                        className='ion-margin-top'
-                                        color={'medium'}
-                                        size='small'
-                                        onClick={() => seeIntroAgain()}
-                                        fill='clear'
-                                    >
-                                        Watch Intro
-                                        <IonIcon icon={personCircleOutline} slot='end' />
-                                    </IonButton>
-                                </form>
-                            </IonCardContent>
-                        </IonCard>
+                                                <IonButton
+                                                    type='button'
+                                                    expand='block'
+                                                    className='ion-margin-top'
+                                                    color={'secondary'}
+                                                    routerLink='/register'
+                                                >
+                                                    Create account
+                                                    <IonIcon icon={personCircleOutline} slot='end' />
+                                                </IonButton>
+
+                                                <IonButton
+                                                    type='button'
+                                                    expand='block'
+                                                    className='ion-margin-top'
+                                                    color={'medium'}
+                                                    size='small'
+                                                    onClick={() => seeIntroAgain()}
+                                                    fill='clear'
+                                                >
+                                                    Watch Intro
+                                                    <IonIcon icon={personCircleOutline} slot='end' />
+                                                </IonButton>
+                                            </form>
+                                        </IonCardContent>
+                                    </IonCard>
+                                </IonCol>
+                            </IonRow>
+                        </IonGrid>
+
+
                     </IonContent>
                 </IonPage>
             )}
