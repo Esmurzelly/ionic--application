@@ -75,6 +75,7 @@ const Login: React.FC = () => {
                                                     placeholder='youremail@gmail.com'
                                                     labelPlacement='floating'
                                                     fill='outline'
+                                                    mode='md'
                                                 />
 
                                                 <IonInput
@@ -83,6 +84,7 @@ const Login: React.FC = () => {
                                                     placeholder='password'
                                                     labelPlacement='floating'
                                                     fill='outline'
+                                                    mode='md'
                                                     className='ion-margin-top'
                                                 />
 

@@ -12,8 +12,10 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@capacitor-community/electron": "^4.1.2",
     "@capacitor/android": "^5.2.2",
     "@capacitor/app": "5.0.6",
+    "@capacitor/camera": "^5.0.6",
     "@capacitor/core": "5.2.2",
     "@capacitor/haptics": "5.0.6",
     "@capacitor/ios": "5.2.2",
@@ -32,6 +34,7 @@
     "swiper": "^10.1.0"
   },
   "devDependencies": {
+    "@capacitor/assets": "^2.0.4",
     "@capacitor/cli": "5.2.2",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
